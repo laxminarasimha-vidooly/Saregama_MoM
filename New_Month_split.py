@@ -1,13 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul  9 11:00:36 2019
-
-@author: chiru
-"""
-
+#Importing libraries
 import os
-os.chdir("C:\\Users\\chiru\\Desktop\\Vidooly\\ad_vs_organic_monthly")
-
 import pandas as pd
 import numpy as np
 from datetime import date
@@ -16,7 +8,7 @@ import datetime
 import test_model
 from fetch_video_stats import get_video_ids
 
-
+#Process
 class MonthlySplit:
     def __init__(self,current_date):
         # initialize current date
@@ -124,9 +116,9 @@ class MonthlySplit:
         return qw
         
         
-# class object 
-# pass Month starting date which need to be added 
 
+# pass Month starting date which need to be added 
+#Pass test file
 test_data=MonthlySplit(date(2019,6,1))
 # read AD file
 df=pd.read_excel('Saregama_Final_31May2019.xlsx')
@@ -142,7 +134,5 @@ writer=pd.ExcelWriter(path,engine='xlsxwriter')
 ad_df.to_excel(writer,sheet_name='Ad')
 qw.to_excel(writer,sheet_name='Organic')
 writer.save()
-writer.close()
-
-        
+writer.close()     
         
