@@ -1,17 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 30 16:42:02 2019
-
-@author: chiru
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 30 14:29:51 2019
-
-@author: chiru
-"""
-
+#Importing libraries
 import requests,json
 import pprint
 import pandas as pd
@@ -24,9 +11,7 @@ import operator
 import isodate
 import os
 
-os.chdir('C:\\Users\\chiru\\Desktop\\Vidooly\\ad_vs_organic_monthly')
-
-# build class function
+#process
 class get_video_ids:
     
     # functio to get new api key
@@ -66,34 +51,11 @@ class get_video_ids:
                 break
         else:
             print("got status code success of url_new")
-    
-    
         return r
-#
-#def video_stats(r_dict_1):
-#    print('getting videos ')
-#    try:
-#        for i in range(len(r_dict_1['items'])):
-#            df.loc[index,'video_id_list']=r_dict_1['items'][i].get('id',NA)
-#            df.loc[index,'video_title']=r_dict_1['items'][i]['snippet'].get('title',NA)
-#            df.loc[index,'channel_id']=r_dict_1['items'][i]['snippet'].get('channelId',NA)
-#            df.loc[index,'channel_title']=r_dict_1['items'][i]['snippet'].get('channelTitle',NA)
-#            df.loc[index,'views']=r_dict_1['items'][i]['statistics'].get('views',0)
-#            df.loc[index,'likes']=r_dict_1['items'][i]['statistics'].get('likeCount',0)
-#            df.loc[index,'dislikes']=r_dict_1['items'][i]['statistics'].get('dislikeCount',0)
-#            df.loc[index,'comment']=r_dict_1['items'][i]['statistics'].get('commentCount',0)
-#            df.loc[index,'category']=r_dict_1['items'][i]['snippet'].get('categoryId',0)
-#            df.loc[index,'publilshed_date']=r_dict_1['items'][i]['snippet'].get('publishedAt',NA)
-#            df.loc[index,'YT_duration']=r_dict_1['items'][i]['contentDetails'].get('duration',NA)
-#            index+=1
-#        print("current_shape",df.shape)
-#    except:
-#        print('unable to fetch videos')
 
     def video_stats(self,r_dict_1):
         print('getting videos ')
-#        global index
-        
+      
         for i in range(len(r_dict_1['items'])):
             self.df.loc[self.index,'video_id_list']=r_dict_1['items'][i].get('id','NA')
             self.df.loc[self.index,'video_title']=r_dict_1['items'][i]['snippet'].get('title','NA')
@@ -125,14 +87,9 @@ class get_video_ids:
 
 # function to fecth videos stats from file 
     def fetch_video_stats(self,df):
-        
-        
         df_file=df.copy()
         print(df_file.shape)
-        
         print(df_file.video_id)
-        
-#        df_file['video_id']=df_file['video_id'].astype('str')
         #Check for duplicates
         check=df_file.duplicated(subset=['video_id'],keep='first')
         df_file=df_file.loc[~(check)]
@@ -151,8 +108,4 @@ class get_video_ids:
         self.df['comment']=self.df['comment'].astype(int)
         self.df['engagement']=self.df['likes']+self.df['dislikes']+self.df['comment']
         self.df=self.df.loc[~self.df.isnull().any(axis=1)]
-#        self.df.to_csv('video_stats.csv')
         return self.df
-    
-#v_id=get_video_ids()
-#v_id_df=v_id.fetch_video_stats('test.csv')
