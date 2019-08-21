@@ -1,13 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul  9 15:28:31 2019
 
-@author: chiru
-"""
-
+#Importing libraries
 import os
-os.chdir('C:\\Users\\chiru\\Desktop\\Vidooly\\ad_vs_organic_monthly\\AD_vs organic split new links')
-
 import pandas as pd
 import numpy as np
 from datetime import date
@@ -17,6 +10,7 @@ import test_model
 from fetch_video_stats import get_video_ids
 import random
 
+#Preparing dataset
 class New_link_MonthlySplit:
     def get_ADprediction(self,df):
         return test_model.ad_vs_organic(df)
@@ -32,7 +26,7 @@ class New_link_MonthlySplit:
         dt=dt+d2
         dt=dt.replace(day=1)
         return dt
-    
+    #Ad monthly split
     def AD_Monthly_split(self,df):
         self.df=self.get_ADprediction(df)
         # convert published date to datetime
@@ -55,7 +49,7 @@ class New_link_MonthlySplit:
 #        d1
         df_1=self.df.copy()
         
-        # condition 1
+        #Processing
         for x in df_1.index:
             if (df_1.loc[x,'pb_date']!=self.current_date):
                 # condition to check that published date of video lies between 1st-10ths 
@@ -113,7 +107,7 @@ class New_link_MonthlySplit:
     # get number of months between published date and current date
     
 
-    
+    #Daily tracking sheet processing
     def daily_tracking(self,df):
         df['percentage_change']=(df['viewchange']/df['views'])*100
         df['new_created_date']=pd.to_datetime(df['created_at']).apply(lambda x :x.replace(day=1))
@@ -123,7 +117,7 @@ class New_link_MonthlySplit:
         df_2['percentage']=(df_2['viewchange']/df_2['views'])*100
         
         return df_2
-    
+    #Organic monthly split
     def Organic_monthly_split(self,df_1,df_2):
         # df_1 is daily tracking 
         #df_2 is AD split 
@@ -150,7 +144,7 @@ class New_link_MonthlySplit:
         df_3['days']=d0-df_3['pb_date']
         
         d1=timedelta(days=90)
-#        d1
+
         
         # round value to 2 decimal places
         df_3['percentage']=round(df_3['percentage'],2)
