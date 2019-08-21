@@ -82,7 +82,7 @@ class get_video_ids:
         columns=['video_id_list','channel_id','channel_title','video_title','category','publilshed_date','YT_duration','views','likes','dislikes','comment']
         self.df=pd.DataFrame(columns=columns)
         # listing api_keys
-        self.api_key_list=["","AIzaSyDsMLnCTpmJJY0qd4rUHQGS3PiO9Tw9kEs",'AIzaSyC1ZpuaygN3plfgzH4I2oxrrE_KvJn9T54','AIzaSyCAvUODK49-fCM0UoPErb8yeRMsA_4XHpQ','AIzaSyAAbyrs8ofXHbyVDZV-u7DpH9c9IVAOok0']
+        self.api_key_list=["keys"]
         # exhausted keys are inserted into exceed key
         self.exceed_key=[]
         self.api_key=self.api_key_list[0]   
