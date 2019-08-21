@@ -1,13 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul  9 11:00:36 2019
-
-@author: chiru
-"""
-
+#Importing libraries
 import os
-os.chdir("C:\\Users\\chiru\\Desktop\\Vidooly\\ad_vs_organic_monthly")
-
 import pandas as pd
 import numpy as np
 from datetime import date
@@ -16,7 +8,7 @@ import datetime
 import test_model
 from fetch_video_stats import get_video_ids
 
-
+#Processing
 class MonthlySplit:
     def __init__(self,current_date):
         # initialize current date
@@ -86,7 +78,7 @@ class MonthlySplit:
         
         df_2['Ad Percent']=(df_2['Ad Views']/df_2['Total Views'])*100
         
-        # dropping not required columns
+        # dropping unrequired columns
         
         df_2.drop(['video_id_list','views','AD_views','Organic_views','days','video_pb_date'],axis=1,inplace=True)
         
@@ -143,6 +135,3 @@ ad_df.to_excel(writer,sheet_name='Ad')
 qw.to_excel(writer,sheet_name='Organic')
 writer.save()
 writer.close()
-
-        
-        
